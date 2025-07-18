@@ -1,0 +1,30 @@
+<!ELEMENT cafe (defs, info, menu, metadata)>
+<!ELEMENT defs (style)>
+<!ATTLIST style id ID #IMPLIED>
+<!ELEMENT style (#PCDATA)>
+
+<!ELEMENT info (n, tagline, media)>
+<!ELEMENT n (#PCDATA)>
+<!ELEMENT tagline (#PCDATA)>
+<!ELEMENT media (image?, audio?)>
+
+<!ELEMENT image EMPTY>
+<!ATTLIST image src CDATA #REQUIRED>
+
+<!ELEMENT audio (#PCDATA)>
+<!ATTLIST audio src CDATA #REQUIRED controls CDATA #IMPLIED>
+
+<!ELEMENT menu (dish+)>
+<!ELEMENT dish (n, price, description?, category, dietary?, media)>
+<!ATTLIST dish id CDATA #REQUIRED data-price CDATA #IMPLIED>
+
+<!ELEMENT price (#PCDATA)>
+<!ATTLIST price currency CDATA #IMPLIED>
+
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT dietary (#PCDATA)>
+
+<!ELEMENT metadata (created, last_updated)>
+<!ELEMENT created (#PCDATA)>
+<!ELEMENT last_updated (#PCDATA)>
