@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="#inline-css"?>
+<cafe xmlns="http://www.w3.org/1999/xhtml">
+    <defs>
+        <style id="inline-css">
+            cafe {
+                display: block;
+                font-family: 'Arial', sans-serif;
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+                min-height: 100vh;
+                padding: 20px;
+                color: #e94560;
+                line-height: 1.6;
+            }
+
+            info {
+                display: block;
+                text-align: center;
+                background: rgba(15, 52, 96, 0.9);
+                border-radius: 25px;
+                padding: 40px;
+                margin-bottom: 50px;
+                box-shadow: 0 20px 50px rgba(233, 69, 96, 0.3);
+                animation: fadeInUp 1s ease-out;
+                border: 3px solid #e94560;
+            }
+
+            n {
+                display: block;
+                font-size: 3.5em;
+                color: #f5f5f5;
+                margin-bottom: 15px;
+                text-shadow: 3px 3px 6px rgba(233, 69, 96, 0.5);
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+
+            tagline {
+                display: block;
+                font-size: 1.4em;
+                color: #e94560;
+                font-style: italic;
+                margin-bottom: 25px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            media {
+                display: block;
+                text-align: center;
+                margin: 25px 0;
+            }
+
+            image {
+                display: inline-block;
+                width: 800px;
+                height: 350px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+                margin: 15px;
+                animation: pulse 2s infinite;
+                background: #16213e;
+                position: relative;
+                overflow: hidden;
+                border: 2px solid #e94560;
+            }
+
+            /* Use background-image for XML compatibility */
+            image[src] {
+                background-image: attr(src url);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            /* Fallback images using CSS content */
+            image[src="cafe_interior.gif"] {
+                background-image: url("cafe_interior.gif");
+            }
+            image[src="beetroot_salad.gif"] {
+                background-image: url("beetroot_salad.gif");
+            }
+            image[src="sourdough_sandwich.gif"] {
+                background-image: url("sourdough_sandwich.gif");
+            }
+            image[src="spinach_pie.gif"] {
+                background-image: url("spinach_pie.gif");
+            }
+            image[src="feta_pancake.gif"] {
+                background-image: url("feta_pancake.gif");
+            }
+
+            /* Food emoji placeholders for each image */
+            image:before {
+                font-size: 70px;
+                display: block;
+                padding-top: 45px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(26, 26, 46, 0.9);
+                text-align: center;
+                z-index: 1;
+                color: #e94560;
+            }
+
+            /* Specific emojis for each image */
+            image[src="cafe_interior.gif"]:before {
+                content: "🏪";
+            }
+
+            image[src="beetroot_salad.gif"]:before {
+                content: "🥗";
+            }
+
+            image[src="sourdough_sandwich.gif"]:before {
+                content: "🥪";
+            }
+
+            image[src="spinach_pie.gif"]:before {
+                content: "🥧";
+            }
+
+            image[src="feta_pancake.gif"]:before {
+                content: "🥞";
+            }
+
+            /* Default fallback */
+            image:before {
+                content: "🍽️";
+            }
+
+            /* Hide emoji when background image loads */
+            image[src]:before {
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            menu {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+                margin-top: 50px;
+            }
+
+            dish {
+                display: block;
+                background: rgba(26, 26, 46, 0.8);
+                border-radius: 20px;
+                padding: 30px;
+                box-shadow: 0 15px 40px rgba(233, 69, 96, 0.2);
+                transition: all 0.4s ease;
+                border: 2px solid #e94560;
+                animation: fadeInUp 1s ease-out both;
+                position: relative;
+                overflow: hidden;
+            }
+
+            dish:hover {
+                transform: translateY(-10px) scale(1.02);
+                box-shadow: 0 25px 60px rgba(233, 69, 96, 0.4);
+                border-color: #f5f5f5;
+            }
+
+            dish:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.1), transparent);
+                transition: left 0.6s;
+            }
+
+            dish:hover:before {
+                left: 100%;
+            }
+
+            dish n {
+                font-size: 1.8em;
+                color: #f5f5f5;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: bold;
+            }
+
+            /* Price display using CSS content with data attributes */
+            dish[data-price="15.00"] n:after { 
+                content: "$15.00";
+                color: #e94560;
+                font-weight: bold;
+                font-size: 1.1em;
+                background: linear-gradient(45deg, #e94560, #f39c12);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            
+            dish[data-price="18.00"] n:after { 
+                content: "$18.00";
+                color: #e94560;
+                font-weight: bold;
+                font-size: 1.1em;
+                background: linear-gradient(45deg, #e94560, #f39c12);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            
+            dish[data-price="20.00"] n:after { 
+                content: "$20.00";
+                color: #e94560;
+                font-weight: bold;
+                font-size: 1.1em;
+                background: linear-gradient(45deg, #e94560, #f39c12);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            
+            dish[data-price="19.50"] n:after { 
+                content: "$19.50";
+                color: #e94560;
+                font-weight: bold;
+                font-size: 1.1em;
+                background: linear-gradient(45deg, #e94560, #f39c12);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            price {
+                display: none;
+            }
+
+            description {
+                display: block;
+                color: #c4c4c4;
+                font-size: 1.1em;
+                line-height: 1.5;
+                margin-top: 12px;
+                padding: 10px 0;
+                font-style: italic;
+            }
+
+            category {
+                display: inline-block;
+                background: linear-gradient(45deg, #e94560, #f39c12);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.9em;
+                margin-top: 15px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-weight: bold;
+                box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+            }
+
+            dietary {
+                display: inline-block;
+                background: linear-gradient(45deg, #f39c12, #e74c3c);
+                color: white;
+                padding: 6px 12px;
+                border-radius: 15px;
+                font-size: 0.85em;
+                margin: 5px;
+                box-shadow: 0 3px 10px rgba(243, 156, 18, 0.3);
+            }
+
+            dietary:before {
+                content: "🌱 ";
+            }
+
+            /* Audio styling */
+            audio {
+                display: block;
+                margin-top: 15px;
+                width: 100%;
+                margin: 20px auto;
+                max-width: 320px;
+                border-radius: 12px;
+                background: #16213e;
+                border: 3px solid #e94560;
+                padding: 8px;
+            }
+
+            /* Audio placeholder when not supported */
+            audio:after {
+                content: "🎵 Click to play café sounds";
+                display: block;
+                text-align: center;
+                color: #e94560;
+                font-size: 1em;
+                padding: 12px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+            /* Custom audio controls styling */
+            audio[src] {
+                background: linear-gradient(45deg, #e94560, #f39c12);
+            }
+
+            audio[src="cafe_sounds.mp3"]:before {
+                content: "🍽️ ";
+                color: white;
+                font-size: 1.4em;
+            }
+
+            dish media {
+                margin: 20px 0;
+            }
+
+            dish media image {
+                width: 100%;
+                max-width: 280px;
+                height: 140px;
+                margin: 0 0 15px 0;
+            }
+
+            metadata {
+                display: block;
+                text-align: center;
+                margin-top: 50px;
+                padding: 25px;
+                background: rgba(15, 52, 96, 0.7);
+                border-radius: 15px;
+                font-size: 1em;
+                color: #c4c4c4;
+                border: 2px solid #e94560;
+            }
+
+            created, last_updated, version {
+                display: inline-block;
+                margin: 0 15px;
+                font-weight: bold;
+            }
+
+            created:before { content: "Created: "; color: #e94560; }
+            last_updated:before { content: "Updated: "; color: #e94560; }
+            version:before { content: "Version: "; color: #e94560; }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(40px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.08); }
+            }
+
+            @media (max-width: 768px) {
+                cafe {
+                    padding: 15px;
+                }
+                
+                n {
+                    font-size: 2.5em;
+                }
+                
+                menu {
+                    grid-template-columns: 1fr;
+                    gap: 25px;
+                }
+                
+                dish {
+                    padding: 25px;
+                }
+            }
+
+            @keyframes sparkle {
+                0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+                50% { opacity: 1; transform: scale(1) rotate(180deg); }
+            }
+
+            dish:hover category {
+                animation: sparkle 1.2s ease-in-out;
+            }
+
+            defs {
+                display: none;
+            }
+        </style>
+    </defs>
+
+    <info>
+        <n>Bryan's Café</n>
+        <tagline>Fresh Lunch Menu</tagline>
+        <media>
+            <image src="cafe_interior.gif"></image>
+            <audio src="cafe_sounds.mp3" controls="controls">Your browser does not support the audio element.</audio>
+
+        </media>
+    </info>
+    
+    <menu>
+        <dish id="1" data-price="15.00">
+            <n>Beetroot and Feta Salad</n>
+            <price currency="USD">15.00</price>
+            <description>Suitable for vegetarians, made with fresh beetroot</description>
+            <category>salad</category>
+            <dietary>vegetarian</dietary>
+            <media>
+                <image src="beetroot_salad.gif"></image>
+            </media>
+        </dish>
+        
+        <dish id="2" data-price="18.00">
+            <n>Sourdough Rye Sandwich</n>
+            <price currency="USD">18.00</price>
+            <description>Cheese and salad sandwich made with organic, sourdough rye bread</description>
+            <category>sandwich</category>
+            <media>
+                <image src="sourdough_sandwich.gif"></image>
+            </media>
+        </dish>
+        
+        <dish id="3" data-price="20.00">
+            <n>Spinach Pie and Salad</n>
+            <price currency="USD">20.00</price>
+            <description>Tasty pie with salad</description>
+            <category>pie</category>
+            <media>
+                <image src="spinach_pie.gif"></image>
+            </media>
+        </dish>
+        
+        <dish id="4" data-price="19.50">
+            <n>Feta Pancakes with Salad</n>
+            <price currency="USD">19.50</price>
+            <description>Tasty pancake filled with feta and salad</description>
+            <category>pancakes</category>
+            <media>
+                <image src="feta_pancake.gif"></image>
+            </media>
+        </dish>
+    </menu>
+    
+    <metadata>
+        <created>2025-07-18</created>
+        <last_updated>2025-07-18</last_updated>
+        <version>1.0</version>
+    </metadata>
+</cafe>
